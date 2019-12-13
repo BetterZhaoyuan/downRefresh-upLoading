@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" id="vp"/>
+    <title>下拉刷新，上拉加载</title>
+	
+	
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/base.css">
+	
+	
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/iscroll-probe.js"></script>
+	
+	
+    <style> 
+        body{ background:#333; display:flex; flex-direction:column; }
+        .header, .footer{ line-height:1.2rem; background:#58bc58; text-align:center; font-size:.533333rem; color:#fff; }
+        #wrapper{ flex:1; overflow:hidden; }
+        p{ color:#fff; text-align:center; font-size:.40625rem; line-height:1.25rem; }
+        ul{ background: #fff; font-size:.4rem; position:relative; }
+        .pullDown{ position:absolute; top:-1.25rem; left:0; width:100%; z-index:100; }
+        .pullUp{ position:absolute; bottom:-1.25rem; left:0; width:100%; z-index:100; }
+        li{ line-height:.46875rem; padding:.3125rem; color:#000; }
+    </style>
+	
+	
+    <script>
+        var wd = document.documentElement.clientWidth*window.devicePixelRatio/10;
+        document.getElementsByTagName("html")[0].style.fontSize = wd + "px";
+        var scale = 1/window.devicePixelRatio;
+        var mstr = 'initial-scale='+ scale +', maximum-scale='+ scale +', minimum-scale='+ scale +', user-scalable=no';
+        document.getElementById("vp").content = mstr;
+    </script>
+	
+</head>
+<body>
+    <div class="header">
+        我是头部
+    </div>
+
+    <div id="wrapper">
+        <div>
+            <p class="pullDown">下拉刷新...</p>
+            <ul class="dataLine">
+                <li>《爱笑的眼睛》</li>
+                <li>如果不是那镜子</li>
+                <li>不像你不藏秘密</li>
+                <li>我还不肯相信</li>
+                <li>没有你我的笑更美丽</li>
+                <li>那天听你在电话里略带抱歉的关心</li>
+                <li>我嘟的一声切的比你说分手彻底</li>
+                <li>泪湿的衣洗干净阳光里晒干回忆</li>
+                <li>折好了伤心明天起只和快乐出去</li>
+                <li>这爱的城市虽然拥挤</li>
+                <li>如果真的遇见你</li>
+                <li>你不必讶异我的笑她无法代替</li>
+                <li>离开你我才发现自己</li>
+                <li>那爱笑的眼睛流过泪</li>
+                <li>像躲不过的暴风雨</li>
+                <li>淋湿的昨天删去(忘记)</li>
+                <li>离开你我才找回自己</li>
+                <li>那爱笑的眼睛再见爱情</li>
+                <li>我一定让自己让自己决定</li>
+                <li>泪湿的衣洗干净阳光里晒干回忆</li>
+                <li>折好了伤心明天只和快乐出去</li>
+                <li>这爱的城市虽然拥挤</li>
+                <li>如果真的遇见你</li>
+                <li>你不必讶异我的笑她无法代替</li>
+                <li>离开你我才发现自己</li>
+                <li>那爱笑的眼睛流了泪</li>
+                <li>当一个人看旧电影</li>
+                <li>是我不小心而已</li>
+                <li>离开你我才找回我自己</li>
+                <li>那爱笑的眼睛再见到你</li>
+                <li>我一定让自己让自己坚定</li>
+                <li>离开你我才发现自己</li>
+                <li>那爱笑的眼睛流过泪</li>
+                <li>像躲不过的暴风雨</li>
+                <li>淋湿的昨天忘记</li>
+                <li>离开你我才找回自己</li>
+                <li>那爱笑的眼睛再见爱情</li>
+                <li>我一定让自己让自己坚定</li>
+                <li>再见到你</li>
+                <li>我一定让自己假装很坚定</li>
+            </ul>
+            <p class="pullUp">上拉加载...</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        我是尾部
+    </div>
+
+    <script>
+        var myScroll;
+        myScroll = new IScroll('#wrapper', {
+            probeType: 2,
+            fadeScrollbars: false
+        });
+
+        var pullDown = 1;     // 下拉刷新避免多次执行
+        var pullUp = 1;       // 上拉加载避免多次执行
+        var downHeight = $(".pullDown").height();
+        var upHeight = $(".pullUp").height();
+
+        myScroll.on('scroll', function(){
+            var y = myScroll.y;
+            
+            // 下拉加载
+            if(y >= downHeight && pullDown){
+                $(".pullDown").addClass("refresh").html("松开刷新...");
+                myScroll.minScrollY = downHeight;
+                pullDown = 0;
+            }    
+            if(y <= downHeight && y >= 0 && !pullDown){
+                $(".pullDown").removeClass("refresh").html("下拉刷新...");
+                pullDown = 1;
+                myScroll.minScrollY = 0;
+            }
+
+            // 上拉刷新
+            var maxHeight = myScroll.maxScrollY;
+            if(y < (maxHeight - upHeight) && pullUp){
+                $(".pullUp").addClass("loading").html("松开加载...");
+                myScroll.maxScrollY = maxHeight - upHeight;
+                pullUp = 0;
+            }
+            if(y > maxHeight && y < (maxHeight + upHeight) && !pullUp){
+                $(".pullUp").removeClass("loading").html("上拉加载...");
+                myScroll.maxScrollY = maxHeight + upHeight;
+                pullUp = 1;
+            }
+        });
+
+        myScroll.on('scrollEnd', function(){
+            if($(".pullDown").hasClass("refresh")){
+                $(".pullDown").text("正在刷新...");
+                common.loadingShow();
+                setTimeout(function(){
+                    location.reload();
+                }, 2000);
+            }
+
+            if($(".pullUp").hasClass("loading")){
+                $(".pullUp").text("正在加载...");
+                setTimeout(function(){
+                    add();
+                    myScroll.refresh();
+                }, 1000);
+            }
+        });
+
+        myScroll.on('refresh', function(){
+            $(".pullUp").removeClass("loading").html("上拉加载...");
+            pullUp = 1;
+        });
+
+
+        // 向列表添加数据
+        function add(){
+            common.loadingShow();
+            var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            var html = $.map(arr, function(item, index){
+                return "<li>我是加载的第"+(index+1)+"条数据</li>"
+            }).join("");
+            $(".dataLine").append(html);
+            common.loadingHide();
+        }
+
+    </script>
+</body>
+</html>

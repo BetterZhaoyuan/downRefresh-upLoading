@@ -1,0 +1,195 @@
+﻿html {
+	width:100%; 
+	height:100%; 
+	padding:0;
+	margin:0;
+}
+body {
+	background: rgb(249, 249, 249);
+	margin: 0px;
+	padding: 0px;
+	display: flex;
+	flex-direction: column;
+}
+#wrapper {
+	position: relative;
+	flex: 1;
+	overflow: hidden;
+}
+.content {
+	position: relative;
+	width: 100%;
+	height: 90%;
+}
+p {
+	padding:0;
+	margin:0;
+	text-align: center;
+	font-size: 15px;
+	line-height: 50px;
+}
+.dataLine {
+	height: auto;
+	width: 100%;
+}
+
+.data {
+	width: 100%;
+	height: auto;
+}
+
+.pullUp {
+	width: 100%;
+	height: 50px;
+	position: absolute;
+	bottom: -50px;
+	left: 0;
+	width: 100%;
+	z-index: 100;
+}
+
+.pullDown {
+	width: 100%;
+	height: 50px;
+	position: absolute;
+	top: -50px;
+	left: 0;
+	width: 100%;
+	z-index: 100;
+}
+
+.con_list_dv{
+	width: 100%;
+	height: 110px;
+	border: 1px solid rgb(233, 233, 233);
+	margin-top: 15px;
+}
+
+.item_title_dv, .item_content_dv{
+	top: 0;
+	left: 0;
+	border: none;
+}
+
+/* .item_title_dv{
+	height: 30%;
+	border-bottom: 1px solid rgb(233, 233, 233);
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	background-color: rgb(251, 251, 251);
+	background-image: url('../image/v_icon_list_del.png');
+	background-repeat: no-repeat;
+	background-position: 97%;
+	background-size: 7% 80%;
+	-webkit-background-size: 7% 80%;
+	-moz-background-size: 7% 80%;
+	-o-background-size: 7% 80%;
+} */
+
+ .item_title_dv{
+	height: 30%;
+	background: white;
+} 
+.item_title_dv div{
+	border: none;
+	font-size: 14px;
+	height: 100%;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	line-height: 32px;
+	padding-left: 3%
+}
+
+.item_content_dv{
+	height: calc(110px - 30%);
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom: 1px solid rgb(233, 233, 233);
+	background-color: rgb(255, 255, 255)
+}
+.item_params_dv{
+	border: none;
+	height: 47%; 
+}
+ 
+.item_type_dv, .item_format_dv, .item_price_dv, .item_time_dv {
+	font-size: 14px;
+	line-height: 35px;
+	border: none;
+	float: left;
+	padding-left: 3% 
+} 
+.item_del_dv{float: right;margin-right: 3%;}
+.item_del_dv img{height: 35px; width: 35px;}
+.item_format_dv, .item_price_dv{
+	margin-left: 3%
+}
+.bottom-title{
+	height: 30px;
+	text-align: center;
+	font-size: 13px;
+	color:#666666;
+	display: none;
+	margin-top: 10px;
+	position: relative;
+}
+.bootom-button{
+	height: 90px;
+	width: 100%;
+}
+.bootom-button div{ 
+		width: 120px;
+		height: 40px;
+		text-align: center;
+		color: white;
+		line-height: 40px;
+		border-radius:5px 5px 5px 5px;
+		font-size:15px;
+}
+.button-left{float: left;margin-left: 10%;background: rgb(0,171,240)}
+.button-right{float: right;margin-right: 10%;;background: rgb(255,168,0)}
+.mask{display:none;background-color: black; width: 100%; position: absolute; height: 100%; opacity: 0.8; z-index: 100;top:0px; text-align: right;}
+.del-dv{
+	width: 70%;
+	position: absolute;
+	left: 15%;
+	background: white;
+	height: 150px;
+	top: 28%;
+	z-index: 500;
+	display: none;
+}
+.dv-title{
+	height: 30px;
+	line-height: 30px;
+	text-align: left;
+	font-size: 15px;
+	font-weight: bold;
+	border-bottom: 1px solid #e4e4e4;
+}
+.dv-title span{margin-left: 10px;}
+.dv-text{
+	height: 50px;
+	width: 100%;
+	text-align: center;
+	font-size: 14px;
+	line-height: 50px;
+	position: relative;
+}
+.del-btn-dv{
+	height: 50px;
+	width: 100%;
+	margin-top: 10px;
+}
+.del-btn-dv{width: 80%;margin-left: 10%;}
+.del-btn-dv div{
+	height: 30px; 
+	width: 45%;
+	text-align: center;
+	line-height: 30px;
+	font-size: 13px;
+	color:white;
+	border-radius: 5px 5px 5px 5px; 
+}
+.btn-left{float: left;background: rgb(0,184,255);}
+.btn-right{float: right;background: red;}
